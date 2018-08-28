@@ -45,3 +45,32 @@ Requirements
 + ```pandoc``` somewhere in your path.
 + ```pypandoc```
 
+Several things should be done
+------------
+1. Preprocessing
+`python3 preprocess.py input.tex output.md debug`
+
+2. Remove labels in figure
+In sublime text, open output.md
+Find using RegEx: `\\label\{fig:(.*?)\}`
+replace to:
+
+3. Change figure reference
+In sublime text, open output.md
+Find using RegEx:  `\[@fig:(.*?)\]`
+replace to: `{@fig:$1}`
+
+4. Align figure in center
+In sublime text, open output.md
+Find using RegEx: `!\[(.*?)\]\((.*?)\){#fig:(.*?)}`
+replace to: `<div align=center>\n![$1]\($2){#fig:$3}\n</div>`
+
+5. Fix multi-citations
+In sublime text, open output.md
+Find using RegEx: `\[@(.*?), (.*)\]`
+replace to: `[@$1; @$2]`
+***Several times!!!***
+
+6. Convert to docx
+pandoc --filter pandoc-fignos --filter pandoc-citeproc --bibliography=mybib.bib --csl=elsevier-harvard.csl output.md -o output.docx
+
