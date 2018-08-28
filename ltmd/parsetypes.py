@@ -185,7 +185,7 @@ class Cite(LatexObject):
 
     def convert_cite(self):
         try:
-            self.output_content = "@{}".format(self.cite_text)
+            self.output_content = "[@{}]".format(self.cite_text)
         except AttributeError:  # no match
             self.output_content = "@ERROR"
 
